@@ -1,0 +1,8 @@
+*DS_Store
+*.o
+*.swo
+*.swp
+._*
+*.dSYM
+.nfs.*
+.vscode
