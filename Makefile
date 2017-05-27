@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmather <dmather@student.42.fr>            +#+  +:+       +#+         #
+#    By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 08:55:42 by dmather           #+#    #+#              #
-#    Updated: 2017/05/27 18:47:06 by dmather          ###   ########.fr        #
+#    Updated: 2017/05/28 00:47:06 by kbamping         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ CY			= \033[33m
 FLAGS		= -Wall -Wextra -Werror -lncurses
 
 SRCS		=	main.cpp		\
-				Player.cpp
+				Player.cpp		\
+				GameObject.cpp
 
 all: $(NAME)
 
