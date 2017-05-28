@@ -6,12 +6,12 @@
 /*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 02:16:59 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 05:18:26 by kbamping         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Player.hpp"
 #include "GameObject.hpp"
+#include "Player.hpp"
 
 int	main()
 {
@@ -85,8 +85,6 @@ int	main()
 				delwin(menuwin);
 				endwin();
 				refresh();
-
-	std::cout << "----------" << std::endl;
 
 				WINDOW * infowin = newwin(5, xMax, 0, 0);
 				box(infowin, 0, 0);

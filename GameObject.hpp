@@ -36,7 +36,7 @@ public:
 		void	mvright(void);
 		int		getmv(void);
         void	displayGameObject(void);
-        int     *getLocation(void) const;
+        int     getLocation(char c) const;
         void    setLocation(int xLoc, int yLoc);
         int     getMax(char c) const;
         void    setMax(char c, int val);
@@ -45,7 +45,7 @@ public:
         
 
 private:
-        int     *_currLocation;
+        int     _currLocation[2];
         int     _xMax;
         int     _yMax;
 		char	_character;
