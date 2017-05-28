@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 16:40:43 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 17:51:56 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 18:22:51 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Bullet : public GameObject
 		Bullet(Bullet const & src);
 		Bullet& operator=(Bullet const & rhs);
 		~Bullet(void);
-		
+
 		int		_xLoc;
 		int		_yLoc;
         char	_character;

@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 17:54:52 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 18:23:36 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 #define	MAX_ENEMY 10
 
-//void	updateDisplay(void);
-bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e);
 bool	checkBulletCollision(Bullet *b, BasicEnemy *e);
 
 static long int	sec;
@@ -38,7 +36,7 @@ void game_clock(WINDOW * infowin)
 		{
 			sec = tv.tv_sec - clock_start;
 			microsec = tv.tv_usec / 10000;
-			mvwprintw(infowin, 1, 12, "%li : %li", sec, microsec);
+			mvwprintw(infowin, 1, 12, "%li", sec);
 		}
 	}
 }
@@ -144,14 +142,14 @@ int	main()
 				}
 
 				do {
-					if (p->getmv(microsec) == 32)
+				/*	if (p->getmv(microsec) == 32)
 					{
 						Bullet *b = new Bullet(p->getLocation('x'), p->getLocation('y')); //this->_currLocation[0], this->_currLocation[1]
 					//	b->setLocation(p->getLocation('x'), p->getLocation('y'));
 						mvwaddch(gamewin, b->_yLoc, ++b->_xLoc, '-');
 						if (microsec)
 						{}
-					}
+					}*/
 
 					for (int i = 0 ; i < MAX_ENEMY; i++) {
 						if (e[i]->isAlive() && (sec - e[i]->_lastSpawnTime) == 1)
@@ -238,23 +236,6 @@ bool	checkBulletCollision(Bullet *b, BasicEnemy *e) {
 		}
 //	if (b->getLocation('x') > xMax - 2)
 //		delete b;
-	}
-	return (false);
-}
-
-bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e) {
-	int	playerLoc[2], enemyLoc[2];
-
-	playerLoc[0] = p.getLocation('x');
-	playerLoc[1] = p.getLocation('y');
-	// Check enemies
-	for (int i = 0 ;i < MAX_ENEMY; i++) {
-		enemyLoc[0] = e->getLocation('x');
-		enemyLoc[1] = e->getLocation('y');
-		if (playerLoc[1] == enemyLoc[1] && (playerLoc[0] == enemyLoc[0] + 1 || playerLoc[0] == enemyLoc[0]) && e[i].isAlive()) {
-			p.setAlive(false);
-			return (true);
-		}
 	}
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 17:47:14 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 18:19:37 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ void	GameObject::mvright(void)
 
 void	GameObject::shoot(long int microsec)
 {
-//	Bullet *b = new Bullet(this->_currLocation[0], this->_currLocation[1]);
-//	b->setLocation(this->_currLocation[0], this->_currLocation[1]);
+	Bullet *b = new Bullet(this->_currLocation[0], this->_currLocation[1]);
+	b->setLocation(this->_currLocation[0], this->_currLocation[1]);
 	if (microsec)
 	{}
-//	mvwaddch(this->_curwin, b->getLocation('y'), ++b->_xLoc, '-');	
+	mvwaddch(this->_curwin, b->getLocation('y'), ++b->_xLoc, '-');	
 }
 
 int GameObject::getmv(long int	microsec)
