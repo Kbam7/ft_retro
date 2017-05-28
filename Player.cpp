@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 17:29:07 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/27 21:00:09 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 10:15:23 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ Player::Player(WINDOW * win, int yMax)
 	keypad(curwin, true);
 	this->_character = '>';
 }
+/*
+void	Player::add_score(unsigned int amount)
+{
+	this->score += amount;
+//	mvwprintw(infowin, 1, 7, "%i", this->score);
+}*/
 
 void	Player::mvup()
 {

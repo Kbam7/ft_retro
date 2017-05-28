@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 14:53:27 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/27 20:44:34 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 10:37:44 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <stdio.h>
+#include <time.h>
+#include <unistd.h>
 
 class Player
 {
@@ -36,8 +39,11 @@ class Player
 		void	mvright();
 		int		getmv();
 		void	displayPlayer();
+//		void	add_score(unsigned int amount);
 		
 		WINDOW * curwin;
+		static unsigned int	lives;
+		static unsigned int	score;
 
 	private:
 		int		_xLoc;
