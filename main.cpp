@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 12:52:45 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 13:37:53 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 #define	MAX_ENEMY 20
 /*
-void	updateDisplay(void);
-bool	objectsCollide(void);*/
+void	updateDisplay(void);*/
+bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e);
 
 static long int	sec;
 
@@ -140,13 +140,27 @@ int	main()
 					//updateDisplay();
 
 
-				for (int i = 0 ; i < MAX_ENEMY; i++) {
-					if (e[i]->isAlive())
-						e[i]->displayGameObject();
-				}
-				if (p->isAlive())
-					p->displayGameObject();
-					
+					for (int i = 0 ; i < MAX_ENEMY; i++) {
+						if (e[i]->isAlive())
+							e[i]->displayGameObject();
+					}
+					if (p->isAlive())
+					{
+						int	playerLoc[2], enemyLoc[2];
+						
+						playerLoc[0] = p->getLocation('x');
+						playerLoc[1] = p->getLocation('y');
+						for (int i = 0 ;i < MAX_ENEMY; i++) {
+							enemyLoc[0] = e[i]->getLocation('x');
+							enemyLoc[1] = e[i]->getLocation('y');
+							if (playerLoc[1] == enemyLoc[1] && (playerLoc[0] == enemyLoc[0] - 1 || playerLoc[0] == enemyLoc[0]) ) {
+								p->setAlive(false);
+								break;
+							}
+						}
+						if (p->isAlive())
+							p->displayGameObject();
+					}
 
 					mvwprintw(infowin, 1, 1, "Game Time: ");
 					mvwprintw(infowin, 2, 1, "Score: ");
@@ -155,7 +169,7 @@ int	main()
 					wrefresh(infowin);
 					wrefresh(gamewin);
 					refresh();
-				} while (p->getmv() != 27);
+				} while (p->getmv() != 27 && p->isAlive());
 
 				delwin(gamewin);
 				delwin(infowin);
@@ -175,20 +189,20 @@ void	updateDisplay(void) {
 	if (p.isAlive())
 		p.displayGameObject();
 }
-
-bool	objectsCollide(void) {
+*/
+bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e) {
 	int	playerLoc[2], enemyLoc[2];
 
-	playerLoc[0] = Game::player->getLocation('x');
-	playerLoc[1] = Game::player->getLocation('y');
+	playerLoc[0] = p.getLocation('x');
+	playerLoc[1] = p.getLocation('y');
 	// Check enemies
-	for (int i = 0 ;i < 5; i++) {
-		enemyLoc[0] = Game::player->getLocation('x');
-		enemyLoc[1] = Game::player->getLocation('y');
-		if (playerLoc[0] == enemyLoc[0] + 1 && playerLoc[1] == enemyLoc[1]) {
-			Game::player->setAlive(false);
-			return (false);
+	for (int i = 0 ;i < MAX_ENEMY; i++) {
+		enemyLoc[0] = e->getLocation('x');
+		enemyLoc[1] = e->getLocation('y');
+		if (playerLoc[1] == enemyLoc[1] && (playerLoc[0] == enemyLoc[0] + 1 || playerLoc[0] == enemyLoc[0]) ) {
+			p.setAlive(false);
+			return (true);
 		}
 	}
-	return (true);
-}*/
+	return (false);
+}

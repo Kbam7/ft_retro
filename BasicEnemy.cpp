@@ -20,9 +20,14 @@ BasicEnemy::~BasicEnemy(void)
     return;
 }
 
-BasicEnemy::BasicEnemy(WINDOW * win, int xPos, int yPos) : GameObject::GameObject(win, 'B')
+BasicEnemy::BasicEnemy(WINDOW * win, int xPos, int yPos) : GameObject::GameObject(win, 'K')
 {
     //mvwaddch(this->getWindow(), this->getLocation('y') + 10, this->getLocation('x') + 10, '*');
+    char    symbols[8] = {'C', 'E', '<', '{', '[', '(', 'X', 'H'};
+    static size_t r = 0;
+    srand(r++);
+    this->setCharacter(symbols[rand() % 8]);
+
     this->setLocation(xPos, yPos);
 }
 /////////////////////////////////[  overloaded operators  ]////////////////////////////////////////
