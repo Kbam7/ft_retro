@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 13:37:53 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 14:26:22 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,12 +137,13 @@ int	main()
 				}
 
 				do {
-					//updateDisplay();
-
-
 					for (int i = 0 ; i < MAX_ENEMY; i++) {
-						if (e[i]->isAlive())
+						if (e[i]->isAlive() && (sec - e[i]->_lastSpawnTime) == 1)
+						{
+							e[i]->_lastSpawnTime = sec;
+							e[i]->mvleft();
 							e[i]->displayGameObject();
+						}
 					}
 					if (p->isAlive())
 					{

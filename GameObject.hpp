@@ -47,6 +47,7 @@ public:
         char    getCharacter(void) const;
         void    setCharacter(char c);
         
+        int     _lastSpawnTime;
 
 private:
         int     _currLocation[2];
@@ -55,7 +56,6 @@ private:
 		char	_character;
         WINDOW  *_curwin;
         bool    _alive;
-  //      int     _spawnTime; // currtime + spawn interval... so if span <= curr then display
 
 };
 

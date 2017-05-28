@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 12:37:26 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 14:12:28 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ GameObject::GameObject(WINDOW * win, char ch)
 {
     this->_character = ch;
 	this->_alive = true;
+	this->_lastSpawnTime = 0;
     
 	this->setWindow(win);
     // Listen to keypad
