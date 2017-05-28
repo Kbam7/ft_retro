@@ -6,7 +6,7 @@
 /*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 00:54:58 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 01:27:43 by kbamping         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ GameObject::GameObject(WINDOW * win)
     this->_character = '>';
     
 	this->setWindow(win);
-	setLocation(((yMax - 5) / 2), 2);
     // Get terminal size
 	getmaxyx(this->_curwin, this->_yMax, this->_xMax);
+    setLocation(((this->_yMax - 5) / 2), 2);
     // Listen to keypad
 	keypad(this->_curwin, true);
 }
@@ -39,8 +39,8 @@ GameObject& GameObject::operator=(GameObject const & rhs)
 {
     if (this != &rhs)
     {
-		this->_xLoc = rhs._xLoc;
-		this->_yLoc = rhs._yLoc;
+		this->_currLocation[0] = rhs._currLocation[0];
+		this->_currLocation[1] = rhs._currLocation[1];
         this->_xMax = rhs._xMax;
 		this->_yMax = rhs._yMax;
 		this->_character = rhs._character;
@@ -56,7 +56,7 @@ GameObject::~GameObject(void)
 
 void	GameObject::mvup(void)
 {
-    int *loc = this->getLocation(void);
+    int *loc = this->getLocation();
 
 	mvwaddch(this->_curwin, loc[1], loc[0], ' ');
 	loc[1]--;
@@ -66,29 +66,29 @@ void	GameObject::mvup(void)
 
 void	GameObject::mvdown(void)
 {
-	mvwaddch(this->_curwin, this->_yLoc, this->_xLoc, ' ');
-	this->_yLoc++;
-	if (this->_yLoc > this->_yMax - 2)
-		this->_yLoc = 1;
+	mvwaddch(this->_curwin, this->_currLocation[1], this->_currLocation[0], ' ');
+	this->_currLocation[1]++;
+	if (this->_currLocation[1] > this->_yMax - 2)
+		this->_currLocation[1] = 1;
 }
 
 void	GameObject::mvleft(void)
 {
-	mvwaddch(this->_curwin, this->_yLoc, this->_xLoc, ' ');
-	this->_xLoc--;
-	this->_xLoc--;
-	if (this->_xLoc < 1)
-		this->_xLoc = 1;
+	mvwaddch(this->_curwin, this->_currLocation[1], this->_currLocation[0], ' ');
+	this->_currLocation[0]--;
+	this->_currLocation[0]--;
+	if (this->_currLocation[0] < 1)
+		this->_currLocation[0] = 1;
 }
 
 void	GameObject::mvright(void)
 {
-	mvwaddch(this->_curwin, this->_yLoc, this->_xLoc,
+	mvwaddch(this->_curwin, this->_currLocation[1], this->_currLocation[0], ' ');
     
-	this->_xLoc++;
-	this->_xLoc++;
-	if (this->_xLoc > this->_xMax - 2)
-		this->_xLoc = this->_xMax - 2;
+	this->_currLocation[0]++;
+	this->_currLocation[0]++;
+	if (this->_currLocation[0] > this->_xMax - 2)
+		this->_currLocation[0] = this->_xMax - 2;
 }
 
 int GameObject::getmv(void)
@@ -116,10 +116,10 @@ int GameObject::getmv(void)
 
 void	GameObject::displayGameObject(void)
 {
-	mvwaddch(this->_curwin, this->_yLoc, this->_xLoc, this->_character);
+	mvwaddch(this->_curwin, this->_currLocation[1], this->_currLocation[0], this->_character);
 }
 
-int     *GameObject::getLocation(void)
+int     *GameObject::getLocation(void) const
 {
     return (this->_currLocation);
 }
@@ -127,28 +127,28 @@ int     *GameObject::getLocation(void)
 void    GameObject::setLocation(int xLoc, int yLoc)
 {
     this->_currLocation[0] = xLoc;
-    this->_some[1] = yLoc;
+    this->_currLocation[1] = yLoc;
 }
 
-int     GameObject::getMax(char c)
+int     GameObject::getMax(char c) const
 {
     return ((c == 'x' ? this->_xMax : (c == 'y') ? this->_yMax : -1));
 }
 
 void    GameObject::setMax(char c, int val)
 {
-    if (val == 'x')
-        this->_xLoc = val;
-    else if (val == 'y')
-        this->_yLoc = val;
+    if (c == 'x')
+        this->_xMax = val;
+    else if (c == 'y')
+        this->_yMax = val;
 }
 
-WINDOW  *getWindow() const
+WINDOW  *GameObject::getWindow() const
 {
     return (this->_curwin);
 }
 
-void    setWindow(WINDOW *win)
+void    GameObject::setWindow(WINDOW *win)
 {
     this->_curwin = win;
 }
