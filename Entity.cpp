@@ -3,9 +3,11 @@
 
 /////////////////////////////////[  constructor/destructor  ]////////////////////////////////////////
 
-Entity::Entity(void) : this->_character = '8'
+Entity::Entity(void)
 {
-    shoot(*this);
+
+    setLocation(getLocation('x') + 10, getLocation('y'));
+    displayGameObject();
 
 }
 
@@ -21,14 +23,10 @@ Entity::~Entity(void)
     return;
 }
 
-Entity::Entity(int num) : this->_character = '8';        // saving the charactor
+Entity::Entity(WINDOW * win, int xPos, int yPos) : GameObject::GameObject(win, 'B')
 {
-    this->_object = new Entity[num];
-
-    for (int i = 0; i < num ; i++) { 
-        // flips time function here !!!
-        shoot(this->_object[i], rand());     //// get random X number of window size and send though a copy
-    }
+    //mvwaddch(this->getWindow(), this->getLocation('y') + 10, this->getLocation('x') + 10, '*');
+    setLocation(xPos, yPos);
 }
 /////////////////////////////////[  overloaded operators  ]////////////////////////////////////////
 
@@ -36,10 +34,13 @@ Entity& Entity::operator=(Entity const & rhs)
 {
     if (this != &rhs)
     {
-		this->_xLoc = rhs._xLoc;
-		this->_yLoc = rhs._yLoc;
-		this->_object = rhs._object;
-        this->_character = rhs._character;
+		this->setLocation(rhs.getLocation('x'), rhs.getLocation('y'));
+        this->setMax('x', rhs.getMax('x'));
+		this->setMax('y', rhs.getMax('y'));
+        this->setWindow(rhs.getWindow());
+        this->_entities = rhs._entities;
+        this->setCharacter(rhs.getCharacter());
+        this->setAlive(rhs.isAlive());
     }
 
     return *this;
@@ -47,29 +48,12 @@ Entity& Entity::operator=(Entity const & rhs)
 
 
 
-void    Entity::shoot(Entity object, int location)
+/*void    Entity::shoot(Entity object, int location)
 {
 
-    /*
-    this->_xLoc = x;                                                //get maxwindow size function
-    this->_yLoc = (rand(y) % y);
-    */
-    if ((hitPlayer() == false) && (hitBullet() == false))       // include bullets and player
-    {
-        this->_xLoc--;
-    }
-    if (this->xLoc == 0)
-        setLocation(getmaxXlocation, location);                      // start loop again
 }
 
 bool        Entity::hitPlayer()
 {
-    int *pLoc = getplayerlocation();//get player location!!!!
-    if (((this->xLoc == pLoc[0]) && (this->yloc == pLoc[1]))       // check for unit collision
-    {
-        delete this;
-        
-        return true;
-    }
-    return false;
-}
+
+}*/
