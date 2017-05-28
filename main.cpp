@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 11:53:42 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 12:52:45 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,24 @@ int	main()
 	curs_set(0);
 	nodelay(stdscr, true);
 
-	// get screen size
-	int yMax, xMax;
-	getmaxyx(stdscr, yMax, xMax);
-	if (xMax < 50)
-		xMax = 50;
-	if (yMax < 20)
-		yMax = 20;
-	if (xMax > 150)
-		xMax = 150;
-	if (yMax > 50)
-		yMax = 50;
-	
-
 	std::string	choices[2] = {"play", "exit"};
 	int			choice;
 	int			highlight = 0;
 
 	while (1)
 	{
+		// get screen size
+		int yMax, xMax;
+		getmaxyx(stdscr, yMax, xMax);
+		if (xMax < 50)
+			xMax = 50;
+		if (yMax < 20)
+			yMax = 20;
+		if (xMax > 150)
+			xMax = 150;
+		if (yMax > 50)
+			yMax = 50;
+
 		clear();
 		//	creates a window for our input
 		WINDOW * menuwin = newwin(4, 7, (yMax/2) - 2, (xMax/2) - 2);
@@ -118,6 +117,8 @@ int	main()
 				nodelay(gamewin, true);
 				wrefresh(gamewin);
 
+				getmaxyx(gamewin, yMax, xMax);
+
 				refresh();
 
 				Player * p = new Player(gamewin);
@@ -127,10 +128,10 @@ int	main()
 				for (int x = 0; x < MAX_ENEMY; ++x)
 				{
 					y = (rand() % yMax);
-	//				if (y >= yMax)
-//						y = yMax - 2;
-//					else if (y < 1)
-//						y = 1;
+					if (y >= yMax - 1)
+						y = yMax - 2;
+					else if (y < 1)
+						y = 1;
 
 					 e[x] = new BasicEnemy(gamewin, xMax - 2, y);
 				}

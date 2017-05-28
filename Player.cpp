@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Player.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 17:29:07 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 09:32:57 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 12:41:47 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ Player::Player(void)
 
 Player::Player(WINDOW * win) : GameObject::GameObject(win, '>')
 {
-
+    int x;
+    int y;
+    
+    // Get terminal size
+	getmaxyx(this->getWindow(), y, x);
+    this->setMax('x', x);
+    this->setMax('y', y);
+    setLocation(2, ((this->getMax('y')) / 2));
 }
 
 Player::Player(Player const & src)

@@ -23,7 +23,7 @@ BasicEnemy::~BasicEnemy(void)
 BasicEnemy::BasicEnemy(WINDOW * win, int xPos, int yPos) : GameObject::GameObject(win, 'B')
 {
     //mvwaddch(this->getWindow(), this->getLocation('y') + 10, this->getLocation('x') + 10, '*');
-    setLocation(xPos, yPos);
+    this->setLocation(xPos, yPos);
 }
 /////////////////////////////////[  overloaded operators  ]////////////////////////////////////////
 

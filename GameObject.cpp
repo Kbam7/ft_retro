@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   GameObject.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 10:02:52 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 12:37:26 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ GameObject::GameObject(WINDOW * win, char ch)
 	this->_alive = true;
     
 	this->setWindow(win);
-    // Get terminal size
-	getmaxyx(this->_curwin, this->_yMax, this->_xMax);
-    setLocation(((this->_yMax - 5) / 2), 2);
     // Listen to keypad
 	keypad(this->_curwin, true);
 }
