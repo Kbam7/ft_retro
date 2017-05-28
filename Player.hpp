@@ -13,6 +13,6 @@ class Player : public GameObject {
 
 		// have collision detection -- 
 
-}; 
+};
 
 #endif
