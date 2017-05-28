@@ -45,23 +45,6 @@ Entity& Entity::operator=(Entity const & rhs)
     return *this;
 }
 
-/////////////////////////////////[  member functions  ]////////////////////////////////////////
-
-int             *Entity::getlocation() 
-{
-    int    i[2];
-    i[0] = this->_yLoc;
-    i[1] = this->_xLoc;
-
-    return(i);
-}
-
-void			Entity::setlocation(int x ,int y)
-{
-    this->_xloc = i[0];
-    this->_yloc = i[1];
-}
-
 
 
 void    Entity::shoot(Entity object, int location)
@@ -85,18 +68,8 @@ bool        Entity::hitPlayer()
     if (((this->xLoc == pLoc[0]) && (this->yloc == pLoc[1]))       // check for unit collision
     {
         delete this;
-        return true
-    }
-    return false;
-}
-
-bool        Entity::hitBullet()
-{
-    int *pLoc = getlocation();//get player location!!!!
-    if (((this->xLoc == pLoc[0]) && (this->yloc == pLoc[1]))       // check for Bullet collision
-    {
-        delete this;
-        return true
+        
+        return true;
     }
     return false;
 }

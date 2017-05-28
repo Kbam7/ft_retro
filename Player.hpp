@@ -11,6 +11,8 @@ class Player : public GameObject {
 		Player& operator=(Player const & rhs);
 		~Player(void);
 
-};
+		// have collision detection -- 
+
+}; 
 
 #endif

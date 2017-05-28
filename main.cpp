@@ -6,12 +6,13 @@
 /*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 05:18:26 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 07:55:19 by kbamping         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "GameObject.hpp"
 #include "Player.hpp"
+#include "Entity.hpp"
 
 int	main()
 {
@@ -98,6 +99,8 @@ int	main()
 				refresh();
 
 				Player * p = new Player(gamewin);
+				Entity * e = new Entity(20);
+
 				do {
 					p->displayGameObject();
 					wrefresh(gamewin);
