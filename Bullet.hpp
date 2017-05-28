@@ -4,9 +4,8 @@
 
 #include "GameObject.hpp"                   			  // soon to be base
 
-#include <ctime>
 
-class Bullet : Public Base
+class Bullet : public GameObject
 {
 	public:
 		Bullet(void);
@@ -14,16 +13,13 @@ class Bullet : Public Base
 		Bullet& operator=(Bullet const & rhs);
 		~Bullet(void);
 
-int			*getlocation();
-void		setlocation(int x, int y);
-
 
 void	    displayBullet();
 void    	shoot(Bullet object);                         // fly accross the screen
 void        hitPlayer();
 void        hitBullet();
 
-
+// wont have collision check -- basic object
 		
 
 	private:

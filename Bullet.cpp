@@ -46,21 +46,6 @@ void    Bullet::shoot(object)
     }
 }
 
-int             *Bullet::getlocation() 
-{
-    int    i[2];
-    i[0] = this->_yLoc;
-    i[1] = this->_xLoc;
-
-    return(i);
-}
-
-void			Bullet::setlocation(int x ,int x)
-{
-    this->_xloc = i[0];
-    this->_yloc = i[1];
-}
-
 
 
 /*         ----- if we have a boss that can shoot back
