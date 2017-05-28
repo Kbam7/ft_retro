@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 14:12:28 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 15:54:47 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ void	GameObject::mvright(void)
 		this->_currLocation[0] = this->_xMax - 2;
 }
 
+void	GameObject::shoot(void)
+{   
+	
+}
+
 int GameObject::getmv(void)
 {
 	int	choice = wgetch(this->_curwin);
@@ -104,6 +109,9 @@ int GameObject::getmv(void)
 			break;
 		case KEY_RIGHT:
 			mvright();
+			break;
+		case 32:
+			shoot();
 			break;
 		default:
 			break;

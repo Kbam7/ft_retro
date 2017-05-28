@@ -6,33 +6,38 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 14:26:22 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 15:54:21 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "GameObject.hpp"
 #include "Player.hpp"
 #include "BasicEnemy.hpp"
+#include <sys/time.h>
 
-#define	MAX_ENEMY 20
-/*
-void	updateDisplay(void);*/
+#define	MAX_ENEMY 10
+
+//void	updateDisplay(void);
 bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e);
 
 static long int	sec;
+static long int	microsec;
 
 void game_clock(WINDOW * infowin)
-{
-	static time_t	clock_start = 0;
-	time_t			result = 0;
+{	
+	struct timeval tv;
+	static suseconds_t	clock_start = 0;
 
-	result = time(NULL);
-	if (clock_start == 0)
-		clock_start = result;
-	else
+	if (gettimeofday(&tv, NULL) == 0)
 	{
-		sec = result - clock_start;
-		mvwprintw(infowin, 1, 12, "%li", sec);
+		if (clock_start == 0)
+			clock_start = tv.tv_sec;
+		else
+		{
+			sec = tv.tv_sec - clock_start;
+			microsec = tv.tv_usec / 10000;
+			mvwprintw(infowin, 1, 12, "%li : %li", sec, microsec);
+		}
 	}
 }
 
@@ -144,6 +149,26 @@ int	main()
 							e[i]->mvleft();
 							e[i]->displayGameObject();
 						}
+						//--------------------------------------------------------------------
+						if ((sec - e[i]->_lastSpawnTime) == 5)
+						{
+							e[i]->_lastSpawnTime = sec;
+							BasicEnemy * n[MAX_ENEMY];
+							srand(time(0));
+							int y;
+							for (int x = 0; x < MAX_ENEMY; ++x)
+							{
+								y = (rand() % yMax);
+								if (y >= yMax - 1)
+									y = yMax - 2;
+								else if (y < 1)
+									y = 1;
+
+								n[x] = new BasicEnemy(gamewin, xMax - 2, y);
+
+							}
+						//----------------------------------------------------------------
+						}
 					}
 					if (p->isAlive())
 					{
@@ -165,12 +190,13 @@ int	main()
 
 					mvwprintw(infowin, 1, 1, "Game Time: ");
 					mvwprintw(infowin, 2, 1, "Score: ");
-					mvwprintw(infowin, 3, 1, "Lives: ");
+					mvwprintw(infowin, 3, 1, "Lives: 1");
 					game_clock(infowin);
 					wrefresh(infowin);
 					wrefresh(gamewin);
 					refresh();
 				} while (p->getmv() != 27 && p->isAlive());
+				//reset_all();
 
 				delwin(gamewin);
 				delwin(infowin);
