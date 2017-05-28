@@ -9,7 +9,6 @@ Player::Player(void)
 Player::Player(WINDOW * win) : GameObject::GameObject(win)
 {
 
-
 }
 
 Player::Player(Player const & src)
@@ -22,8 +21,7 @@ Player& Player::operator=(Player const & rhs)
 {
     if (this != &rhs)
     {
-		int	*loc = rhs.getLocation();
-		setLocation(loc[0], loc[1]);
+		setLocation(rhs.getLocation('x'), rhs.getLocation('y'));
 		setMax('x', rhs.getMax('x'));
 		setMax('y', rhs.getMax('y'));
     }

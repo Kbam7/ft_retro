@@ -6,7 +6,7 @@
 /*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 14:53:27 by kbamping           #+#    #+#             */
-/*   Updated: 2017/05/27 21:34:10 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 06:03:50 by sallen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,22 @@ public:
 		void	mvright(void);
 		int		getmv(void);
         void	displayGameObject(void);
-        int     *getLocation(void) const;
+        int     getLocation(char c) const;
         void    setLocation(int xLoc, int yLoc);
         int     getMax(char c) const;
         void    setMax(char c, int val);
         WINDOW  *getWindow() const;
         void    setWindow(WINDOW *win);
+		bool	isAlive(void);
+		void	setAlive(bool val);
         
 
 private:
-        int     *_currLocation;
+        int     _currLocation[2];
         int     _xMax;
         int     _yMax;
 		char	_character;
+		bool	_alive;
         WINDOW  *_curwin;
 
 };

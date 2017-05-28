@@ -6,7 +6,7 @@
 /*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 01:27:43 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 06:08:27 by sallen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ GameObject::~GameObject(void)
 
 void	GameObject::mvup(void)
 {
-    int *loc = this->getLocation();
-
-	mvwaddch(this->_curwin, loc[1], loc[0], ' ');
-	loc[1]--;
-	if (loc[1] < 1)
-		loc[1] = this->_yMax - 2;
+	mvwaddch(this->_curwin, this->_currLocation[1], this->_currLocation[0], ' ');
+	this->_currLocation[1]--;
+	if (this->_currLocation[1] < 1)
+		this->_currLocation[1] = this->_yMax - 2;
 }
 
 void	GameObject::mvdown(void)
@@ -119,14 +117,24 @@ void	GameObject::displayGameObject(void)
 	mvwaddch(this->_curwin, this->_currLocation[1], this->_currLocation[0], this->_character);
 }
 
-int     *GameObject::getLocation(void) const
+int		GameObject::getLocation(char c) const
 {
-    return (this->_currLocation);
+	if (c == 'x')
+    	return (this->_currLocation[0]);
+	else if (c == 'y')
+    	return (this->_currLocation[1]);
+	else
+		return (-1);
 }
 
 void    GameObject::setLocation(int xLoc, int yLoc)
 {
-    this->_currLocation[0] = xLoc;
+	if (xLoc == -1)
+    	xLoc = this->_currLocation[0];
+	if (yLoc == -1)
+		yLoc = this->_currLocation[1];
+
+	this->_currLocation[0] = xLoc;	
     this->_currLocation[1] = yLoc;
 }
 
@@ -153,3 +161,12 @@ void    GameObject::setWindow(WINDOW *win)
     this->_curwin = win;
 }
     
+bool	GameObject::isAlive(void)
+{
+	return ((this->_alive ? true : false));
+}
+
+void	GameObject::setAlive(bool val)
+{
+	this->_alive = val;
+}

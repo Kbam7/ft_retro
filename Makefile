@@ -6,7 +6,7 @@
 #    By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 08:55:42 by dmather           #+#    #+#              #
-#    Updated: 2017/05/28 00:47:06 by kbamping         ###   ########.fr        #
+#    Updated: 2017/05/28 05:57:56 by sallen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,10 @@ CP			= \033[38;5;128m
 CY			= \033[33m
 FLAGS		= -Wall -Wextra -Werror -lncurses
 
-SRCS		=	main.cpp		\
-				Player.cpp		\
-				GameObject.cpp
+SRCS		=	ft_retro.cpp\
+				Player.cpp\
+				GameObject.cpp\
+				GameClass.cpp
 
 all: $(NAME)
 
