@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/27 21:01:31 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 07:55:19 by kbamping         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "GameObject.hpp"
 #include "Player.hpp"
+#include "Entity.hpp"
 
 int	main()
 {
@@ -96,9 +98,11 @@ int	main()
 
 				refresh();
 
-				Player * p = new Player(gamewin, yMax);
+				Player * p = new Player(gamewin);
+				Entity * e = new Entity(20);
+
 				do {
-					p->displayPlayer();
+					p->displayGameObject();
 					wrefresh(gamewin);
 				} while (p->getmv() != 27);
 
