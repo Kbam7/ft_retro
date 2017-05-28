@@ -3,19 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 10:18:41 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 11:53:42 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "GameObject.hpp"
 #include "Player.hpp"
-#include "Entity.hpp"
+#include "BasicEnemy.hpp"
+
+#define	MAX_ENEMY 20
 /*
 void	updateDisplay(void);
 bool	objectsCollide(void);*/
+
+static long int	sec;
+
+void game_clock(WINDOW * infowin)
+{
+	static time_t	clock_start = 0;
+	time_t			result = 0;
+
+	result = time(NULL);
+	if (clock_start == 0)
+		clock_start = result;
+	else
+	{
+		sec = result - clock_start;
+		mvwprintw(infowin, 1, 12, "%li", sec);
+	}
+}
 
 int	main()
 {
@@ -102,17 +121,25 @@ int	main()
 				refresh();
 
 				Player * p = new Player(gamewin);
-				Entity * e[20];
-				for (int x = 0; x < 20; ++x)
+				BasicEnemy * e[MAX_ENEMY];
+				srand(time(0));
+				int y;
+				for (int x = 0; x < MAX_ENEMY; ++x)
 				{
-					 e[x] = new Entity(gamewin, xMax - 1, (rand() % yMax));
+					y = (rand() % yMax);
+	//				if (y >= yMax)
+//						y = yMax - 2;
+//					else if (y < 1)
+//						y = 1;
+
+					 e[x] = new BasicEnemy(gamewin, xMax - 2, y);
 				}
 
 				do {
 					//updateDisplay();
 
 
-				for (int i = 0 ;i < 5; i++) {
+				for (int i = 0 ; i < MAX_ENEMY; i++) {
 					if (e[i]->isAlive())
 						e[i]->displayGameObject();
 				}
@@ -120,7 +147,13 @@ int	main()
 					p->displayGameObject();
 					
 
+					mvwprintw(infowin, 1, 1, "Game Time: ");
+					mvwprintw(infowin, 2, 1, "Score: ");
+					mvwprintw(infowin, 3, 1, "Lives: ");
+					game_clock(infowin);
+					wrefresh(infowin);
 					wrefresh(gamewin);
+					refresh();
 				} while (p->getmv() != 27);
 
 				delwin(gamewin);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+         #
+#    By: dmather <dmather@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 08:55:42 by dmather           #+#    #+#              #
-#    Updated: 2017/05/28 09:15:26 by kbamping         ###   ########.fr        #
+#    Updated: 2017/05/28 11:33:21 by dmather          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS		=	main.cpp		\
 				Player.cpp		\
 				GameObject.cpp	\
 				Bullet.cpp		\
-				Entity.cpp
+				BasicEnemy.cpp
 
 all: $(NAME)
 

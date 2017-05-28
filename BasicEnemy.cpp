@@ -1,36 +1,33 @@
-#include "Entity.hpp"
+#include "BasicEnemy.hpp"
 
 
 /////////////////////////////////[  constructor/destructor  ]////////////////////////////////////////
 
-Entity::Entity(void)
+BasicEnemy::BasicEnemy(void)
 {
-
-    setLocation(getLocation('x') + 10, getLocation('y'));
-    displayGameObject();
 
 }
 
-Entity::Entity(Entity const & src)
+BasicEnemy::BasicEnemy(BasicEnemy const & src)
 {
     *this = src;
     return;
 }
 
 
-Entity::~Entity(void)
+BasicEnemy::~BasicEnemy(void)
 {
     return;
 }
 
-Entity::Entity(WINDOW * win, int xPos, int yPos) : GameObject::GameObject(win, 'B')
+BasicEnemy::BasicEnemy(WINDOW * win, int xPos, int yPos) : GameObject::GameObject(win, 'B')
 {
     //mvwaddch(this->getWindow(), this->getLocation('y') + 10, this->getLocation('x') + 10, '*');
     setLocation(xPos, yPos);
 }
 /////////////////////////////////[  overloaded operators  ]////////////////////////////////////////
 
-Entity& Entity::operator=(Entity const & rhs)
+BasicEnemy& BasicEnemy::operator=(BasicEnemy const & rhs)
 {
     if (this != &rhs)
     {
@@ -48,12 +45,12 @@ Entity& Entity::operator=(Entity const & rhs)
 
 
 
-/*void    Entity::shoot(Entity object, int location)
+/*void    BasicEnemy::shoot(BasicEnemy object, int location)
 {
 
 }
 
-bool        Entity::hitPlayer()
+bool        BasicEnemy::hitPlayer()
 {
 
 }*/
