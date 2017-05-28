@@ -6,7 +6,7 @@
 /*   By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 05:50:30 by kbamping         ###   ########.fr       */
+/*   Updated: 2017/05/28 10:02:52 by kbamping         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ GameObject::GameObject(void)
     return;
 }
 
-GameObject::GameObject(WINDOW * win)
+GameObject::GameObject(WINDOW * win, char ch)
 {
-    this->_character = '>';
+    this->_character = ch;
+	this->_alive = true;
     
 	this->setWindow(win);
     // Get terminal size
@@ -160,4 +161,24 @@ void    GameObject::setWindow(WINDOW *win)
 {
     this->_curwin = win;
 }
-    
+
+bool	GameObject::isAlive(void) const
+{
+	return ((this->_alive ? true : false));
+}
+
+void	GameObject::setAlive(bool val)
+{
+	this->_alive = val;
+}
+
+char    GameObject::getCharacter(void) const
+{
+	return (this->_character);
+}
+
+void    GameObject::setCharacter(char c)
+{
+	if (c > '\0')
+		this->_character = c;
+}

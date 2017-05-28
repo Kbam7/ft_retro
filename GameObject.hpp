@@ -23,7 +23,7 @@
 class GameObject {
 public:
 		GameObject(void);
-        GameObject(WINDOW * win);
+        GameObject(WINDOW * win, char ch);
 		GameObject(GameObject const & src);
 		GameObject& operator=(GameObject const & rhs);
 		~GameObject(void);
@@ -42,6 +42,10 @@ public:
         void    setMax(char c, int val);
         WINDOW  *getWindow() const;
         void    setWindow(WINDOW *win);
+        bool	isAlive(void) const;
+        void	setAlive(bool val);
+        char    getCharacter(void) const;
+        void    setCharacter(char c);
         
 
 private:
@@ -50,6 +54,7 @@ private:
         int     _yMax;
 		char	_character;
         WINDOW  *_curwin;
+        bool    _alive;
 
 };
 

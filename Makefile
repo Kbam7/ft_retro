@@ -6,7 +6,7 @@
 #    By: kbamping <kbamping@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/23 08:55:42 by dmather           #+#    #+#              #
-#    Updated: 2017/05/28 00:47:06 by kbamping         ###   ########.fr        #
+#    Updated: 2017/05/28 09:15:26 by kbamping         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ CR			= \033[31m
 CB			= \033[34m
 CP			= \033[38;5;128m
 CY			= \033[33m
-FLAGS		= -Wall -Wextra -Werror -lncurses
+FLAGS		= -Wall -Wextra -Werror -lncurses -g3
 
 SRCS		=	main.cpp		\
 				Player.cpp		\
-				GameObject.cpp
+				GameObject.cpp	\
+				Bullet.cpp		\
+				Entity.cpp
 
 all: $(NAME)
 
