@@ -6,11 +6,12 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 21:40:15 by kbamping          #+#    #+#             */
-/*   Updated: 2017/05/28 15:54:47 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 17:47:14 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "GameObject.hpp"
+#include "Bullet.hpp"
 
 GameObject::GameObject(void)
 {
@@ -88,12 +89,16 @@ void	GameObject::mvright(void)
 		this->_currLocation[0] = this->_xMax - 2;
 }
 
-void	GameObject::shoot(void)
-{   
-	
+void	GameObject::shoot(long int microsec)
+{
+//	Bullet *b = new Bullet(this->_currLocation[0], this->_currLocation[1]);
+//	b->setLocation(this->_currLocation[0], this->_currLocation[1]);
+	if (microsec)
+	{}
+//	mvwaddch(this->_curwin, b->getLocation('y'), ++b->_xLoc, '-');	
 }
 
-int GameObject::getmv(void)
+int GameObject::getmv(long int	microsec)
 {
 	int	choice = wgetch(this->_curwin);
 	switch(choice)
@@ -111,7 +116,7 @@ int GameObject::getmv(void)
 			mvright();
 			break;
 		case 32:
-			shoot();
+			shoot(microsec);
 			break;
 		default:
 			break;

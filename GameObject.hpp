@@ -34,8 +34,8 @@ public:
 		void	mvdown(void);
 		void	mvleft(void);
 		void	mvright(void);
-		int		getmv(void);
-        void	shoot(void);
+		int		getmv(long int microsec);
+        void	shoot(long int microsec);
         void	displayGameObject(void);
         int     getLocation(char c) const;
         void    setLocation(int xLoc, int yLoc);

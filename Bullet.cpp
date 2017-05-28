@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bullet.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/28 16:40:50 by dmather           #+#    #+#             */
+/*   Updated: 2017/05/28 17:07:31 by dmather          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bullet.hpp"
 
 /////////////////////////////////[  constructor/destructor  ]////////////////////////////////////////
@@ -6,6 +18,12 @@ Bullet::Bullet(void)
 {
     setCharacter('-');
     //shoot(*this);
+}
+
+Bullet::Bullet(int x, int y) : _xLoc(x), _yLoc(y)
+{
+    setCharacter('-');
+    return;
 }
 
 Bullet::Bullet(Bullet const & src)

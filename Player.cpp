@@ -6,7 +6,7 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 17:29:07 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 12:41:47 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 16:08:20 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ Player& Player::operator=(Player const & rhs)
         this->setCharacter(rhs.getCharacter());
         this->setAlive(rhs.isAlive());
     }
-
     return *this;
 }
 

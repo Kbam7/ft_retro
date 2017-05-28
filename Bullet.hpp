@@ -1,34 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bullet.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/28 16:40:43 by dmather           #+#    #+#             */
+/*   Updated: 2017/05/28 17:51:56 by dmather          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef _BULLET_HPP_
 #define _BULLET_HPP_
 
-#include "GameObject.hpp"                   			  // soon to be base
-
+#include "GameObject.hpp"
 
 class Bullet : public GameObject
 {
 	public:
 		Bullet(void);
+		Bullet(int x, int y);
 		Bullet(Bullet const & src);
 		Bullet& operator=(Bullet const & rhs);
 		~Bullet(void);
-
-
-void	    displayBullet();
-void    	shoot(Bullet object);                         // fly accross the screen
-void        hitPlayer();
-void        hitBullet();
-
-// wont have collision check -- basic object
 		
-
-	private:
-
 		int		_xLoc;
 		int		_yLoc;
         char	_character;
-		int		*location;
-
+	private:
 
 };
 

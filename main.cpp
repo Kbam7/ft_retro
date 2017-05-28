@@ -6,19 +6,21 @@
 /*   By: dmather <dmather@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/27 13:40:48 by dmather           #+#    #+#             */
-/*   Updated: 2017/05/28 15:54:21 by dmather          ###   ########.fr       */
+/*   Updated: 2017/05/28 17:54:52 by dmather          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "GameObject.hpp"
 #include "Player.hpp"
 #include "BasicEnemy.hpp"
+#include "Bullet.hpp"
 #include <sys/time.h>
 
 #define	MAX_ENEMY 10
 
 //void	updateDisplay(void);
 bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e);
+bool	checkBulletCollision(Bullet *b, BasicEnemy *e);
 
 static long int	sec;
 static long int	microsec;
@@ -142,15 +144,28 @@ int	main()
 				}
 
 				do {
+					if (p->getmv(microsec) == 32)
+					{
+						Bullet *b = new Bullet(p->getLocation('x'), p->getLocation('y')); //this->_currLocation[0], this->_currLocation[1]
+					//	b->setLocation(p->getLocation('x'), p->getLocation('y'));
+						mvwaddch(gamewin, b->_yLoc, ++b->_xLoc, '-');
+						if (microsec)
+						{}
+					}
+
 					for (int i = 0 ; i < MAX_ENEMY; i++) {
 						if (e[i]->isAlive() && (sec - e[i]->_lastSpawnTime) == 1)
 						{
 							e[i]->_lastSpawnTime = sec;
 							e[i]->mvleft();
 							e[i]->displayGameObject();
+			//		if (checkBulletCollision(b, e))
+			//		{
+			//			e[i]->setAlive(false);
+			//		}
 						}
 						//--------------------------------------------------------------------
-						if ((sec - e[i]->_lastSpawnTime) == 5)
+						/*if ((sec - e[i]->_lastSpawnTime) == 5)
 						{
 							e[i]->_lastSpawnTime = sec;
 							BasicEnemy * n[MAX_ENEMY];
@@ -167,8 +182,8 @@ int	main()
 								n[x] = new BasicEnemy(gamewin, xMax - 2, y);
 
 							}
+						}*/
 						//----------------------------------------------------------------
-						}
 					}
 					if (p->isAlive())
 					{
@@ -189,13 +204,13 @@ int	main()
 					}
 
 					mvwprintw(infowin, 1, 1, "Game Time: ");
-					mvwprintw(infowin, 2, 1, "Score: ");
+					mvwprintw(infowin, 2, 1, "Score: 0");
 					mvwprintw(infowin, 3, 1, "Lives: 1");
 					game_clock(infowin);
 					wrefresh(infowin);
 					wrefresh(gamewin);
 					refresh();
-				} while (p->getmv() != 27 && p->isAlive());
+				} while (p->getmv(microsec) != 27 && p->isAlive());
 				//reset_all();
 
 				delwin(gamewin);
@@ -207,16 +222,26 @@ int	main()
 	}
 	return (0);
 }
-/*
-void	updateDisplay(void) {
-	for (int i = 0 ;i < 5; i++) {
-		if (e[i].isAlive())
-			e[i].displayGameObject();
+
+bool	checkBulletCollision(Bullet *b, BasicEnemy *e) {
+	int	bulletLoc[2], enemyLoc[2];
+
+	bulletLoc[0] = b->getLocation('x');
+	bulletLoc[1] = b->getLocation('y');
+	// Check enemies
+	for (int i = 0 ;i < MAX_ENEMY; i++) {
+		enemyLoc[0] = e->getLocation('x');
+		enemyLoc[1] = e->getLocation('y');
+		if (bulletLoc[1] == enemyLoc[1] && (bulletLoc[0] == enemyLoc[0] + 1 || bulletLoc[0] == enemyLoc[0]) ) {
+			e[i].setAlive(false);
+			return (true);
+		}
+//	if (b->getLocation('x') > xMax - 2)
+//		delete b;
 	}
-	if (p.isAlive())
-		p.displayGameObject();
+	return (false);
 }
-*/
+
 bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e) {
 	int	playerLoc[2], enemyLoc[2];
 
@@ -226,7 +251,7 @@ bool	checkBasicEnemyCollision(Player & p, BasicEnemy *e) {
 	for (int i = 0 ;i < MAX_ENEMY; i++) {
 		enemyLoc[0] = e->getLocation('x');
 		enemyLoc[1] = e->getLocation('y');
-		if (playerLoc[1] == enemyLoc[1] && (playerLoc[0] == enemyLoc[0] + 1 || playerLoc[0] == enemyLoc[0]) ) {
+		if (playerLoc[1] == enemyLoc[1] && (playerLoc[0] == enemyLoc[0] + 1 || playerLoc[0] == enemyLoc[0]) && e[i].isAlive()) {
 			p.setAlive(false);
 			return (true);
 		}
